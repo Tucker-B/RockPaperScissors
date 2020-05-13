@@ -18,9 +18,7 @@
                     return "Paper";
                 } else {
                     return "Scissors";
-                }
-
-                
+                } 
             }
             function playRound(playerSelection, computerSelection) {
                 if (playerSelection == "Rock" && computerSelection == "Scissors") {
@@ -38,21 +36,53 @@
                 } else {
                     return "LOST";
                 }
-                
             }
-            function game() {
-                const playerSelection = prompt("What\'s your move?'");
-                const computerSelection = computerPlay();
+
+            function printScoreboard(playerWins, computerWins) {
+                console.log(`Player wins: ${playerWins} Computer wins: ${computerWins}`);
+            }
+            function printMoves(playerSelection, computerSelection) {
                 console.log(`Player: ${playerSelection} \nComputer: ${computerSelection}`);
-                const result = playRound(playerSelection, computerSelection);
-                if (result == "WIN") {
-                    alert("You\'ve Won!");
-                } else if (result == "LOST"){
-                    alert("You\'ve Lost!");
-                } else {
-                    alert("TIE! Restarting...");
-                    game();
+            }
+
+            // Counters for # of wins for player & computer
+            var playerWins = 0;
+            var computerWins = 0;
+            // If true, game ends
+            var isFinished = false;
+
+            function game() {
+            
+                while(isFinished == false) {
+
+                    const playerSelection = prompt("What\'s your move?'");
+                    const computerSelection = computerPlay();
+
+                    printMoves(playerSelection, computerSelection);
+                    
+                    const result = playRound(playerSelection, computerSelection);
+
+                    if (result == "WIN") {
+                        playerWins++;
+                        alert("You\'ve Won!");
+                    } else if (result == "LOST"){
+                        computerWins++;
+                        alert("You\'ve Lost!");
+                    } else {
+                        alert("TIE! Restarting...");
+                    }
+                    printScoreboard(playerWins, computerWins);
+
+                    if (playerWins == 3 || computerWins == 3) {
+                        isFinished = true;
+                        if (playerWins == 3) {
+                            alert("Game over! You have defeated the mighty robot this time!");
+                        } else {
+                            alert("Game over! You have been ultimately defeated by the robot overlord!");
+                        }
+                    }
                 }
+                alert("Thanks for playing!");
             }
 
             game();
