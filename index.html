@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <script>
+            function getRandomNum(min, max) {
+                return Math.floor((Math.random() * max) + min);
+            }
+            function computerPlay() {
+
+                let randomNum = getRandomNum(1, 3);
+
+                console.log(randomNum);
+
+                if (randomNum == 1) {
+                    return "Rock";
+                } else if (randomNum == 2) {
+                    return "Paper";
+                } else {
+                    return "Scissors";
+                }
+
+                
+            }
+            function playRound(playerSelection, computerSelection) {
+                if (playerSelection == "Rock" && computerSelection == "Scissors") {
+                    return "WIN";
+                } else if (playerSelection == "Paper" && computerSelection == "Rock") {
+                    return "WIN";
+                } else if (playerSelection == "Scissors" && computerSelection == "Paper") {
+                    return "WIN";
+                } else if (playerSelection == "Rock" && computerSelection == "Rock") {
+                    return "TIE";
+                } else if (playerSelection == "Paper" && computerSelection == "Paper") {
+                    return "TIE";
+                } else if (playerSelection == "Scissors" && computerSelection == "Scissors") {
+                    return "TIE";
+                } else {
+                    return "LOST";
+                }
+                
+            }
+            function game() {
+                const playerSelection = prompt("What\'s your move?'");
+                const computerSelection = computerPlay();
+                console.log(`Player: ${playerSelection} \nComputer: ${computerSelection}`);
+                const result = playRound(playerSelection, computerSelection);
+                if (result == "WIN") {
+                    alert("You\'ve Won!");
+                } else if (result == "LOST"){
+                    alert("You\'ve Lost!");
+                } else {
+                    alert("TIE! Restarting...");
+                    game();
+                }
+            }
+
+            game();
+        </script>
+    </head>
+    <body>
+        
+    </body>
+</html>
